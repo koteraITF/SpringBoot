@@ -1,5 +1,9 @@
 # SpringBoot
 
+## 参考サイト
+（https://www.sys-link.jp/technical/SpringBoot/SpringBoot_menu.html）
+第４章以降はサンプルコードが正常に動かないので注意.
+
 ## アノテーション
 
 ### @SprinBootApplication
