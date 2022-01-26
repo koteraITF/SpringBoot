@@ -21,4 +21,19 @@ public class WebMvcControllerAdvice {
     }
     
 ```
-# 先に教える@Contorollerの秘密まで
+# Code
+
+```
+@Contoroller
+@RequestMapping("/sample")   //URLのsample配下で行う
+public class SampleController{
+
+	@GetMapping("/test")　　　//URLのtestでGETアクションを行う
+	public String index(Model model){　 //Modelクラス：ModelクラスとはWebページで使用するデータを管理するクラスである。
+		model.addAttribute("title","Inquiry Form");　
+		//addAttributeは第一引数でViewに渡す名前を、第二引数で値を設定する。今回はtitleというキーを元にViewにInquiryFormを埋め込む。
+		
+		return test;　//test.htmlが呼び出される。
+	}
+}
+```
