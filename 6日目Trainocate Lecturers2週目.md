@@ -108,3 +108,19 @@ addFlashAttribute()はリクエストを隔ててデータを保管する仕組�
 
 ## ステートレス
 システムが現在の情報を表すデータを保持しないことであり、基本的にはアクセスごとにデータは失われる。そのため、次のページへデータを渡すのにはhiddenタグを用いる。
+
+## DIとは
+<img width="550" alt="image" src="https://user-images.githubusercontent.com/97214466/151127259-5379f343-d0bd-471a-a6a7-9ee3633132c4.png">
+
+アノテーションをつけたクラスはDI管理できる。  
+@Controller：Controllerの役割  
+@Service: ビジネスロジックを提供する  
+@Repository: データの永続化に関わる処理を提供(DAO＝Repository)  
+
+## H2データベースとは
+SpringBoot2に付属している練習用のデータベースである。「インメモリデータベース」として利用する。  
+インメモリデータベースとは、アプリ起動のたびに初期化され、初期化時にはschema.sqlとdata.sqlが自動で実行される。  
+
+# ３８H2データベースまで
+
+
