@@ -74,7 +74,7 @@ public String form(Model model) {
 }
 ```
 下図のように、inputタグにname属性を付与することで、バリデーションを設定できる。  
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/97214466/151087876-637a31bd-deba-4c1d-87e5-5c7ee160dfea.png">  
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/97214466/151087876-637a31bd-deba-4c1d-87e5-5c7ee160dfea.png">  
 
 下記コマンドで、BindingResult resultを記入することで、POSTコマンドを行い、バリデーションに引っかかった時に、BindingResultがTrueとなりバリデーションメッセージが表示される。  
 ```
@@ -102,6 +102,9 @@ public String confirm(@Validated InquiryForm inquiryForm,
 RedirectAttributes redirectAttributes
 ```
 addFlashAttribute()はリクエストを隔ててデータを保管する仕組みであるセッションという機能を利用している。
+
+フラッシュスコープを受け取るためには、formのGetMappingで@ModelAttributeと記述する必要がある。
+<img width="350" alt="image" src="https://user-images.githubusercontent.com/97214466/151103716-8a7125b5-6a4e-4c8f-915a-bd94efacf6e7.png">
 
 ## ステートレス
 システムが現在の情報を表すデータを保持しないことであり、基本的にはアクセスごとにデータは失われる。そのため、次のページへデータを渡すのにはhiddenタグを用いる。
