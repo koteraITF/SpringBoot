@@ -89,6 +89,19 @@ public String confirm(@Validated InquiryForm inquiryForm,
 下図の赤線のコマンドでエラーをチェックする。
 ![image](https://user-images.githubusercontent.com/97214466/151094237-c541a53e-e691-425b-8b42-89c591714617.png)
 
+下記コマンドのth:valueで戻るボタンを押しても、値が保存される状態にする。
+```
+<input id="name" name="name" type="text" th:value="*{name}"><br>
+```
+
+## フラッシュスコープ
+リダイレクト後に１度だけ値を保持して表示できる。  
+フラッシュスコープを実現するためには、下記コマンドが必要
+
+```
+RedirectAttributes redirectAttributes
+```
+addFlashAttribute()はリクエストを隔ててデータを保管する仕組みであるセッションという機能を利用している。
 
 ## ステートレス
 システムが現在の情報を表すデータを保持しないことであり、基本的にはアクセスごとにデータは失われる。そのため、次のページへデータを渡すのにはhiddenタグを用いる。
