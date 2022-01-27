@@ -24,5 +24,92 @@ DAOクラスは二つのファイルから構成される。
 getAllで全てのデータを取り出すことができる。
 <img width="717" alt="image" src="https://user-images.githubusercontent.com/97214466/151272596-96d0e244-7460-4155-a85e-37f1fa6c1947.png">
 
+## 例外処理
+Update機能を実装したが、反応がない場合には例外処理を用いる。  
+queryForMapで１件も取得できないなどのエラーはデフォルトのエラー画面が表示されるので問題ないが、エラーが起こってもエラー画面が出力されない事態のために例外処理機能を実装する。
+
+## DBのLISTの取得
+
+下記コマンドでMapリストからデータ一覧を取得できる。
+```
+（TaskDaoImpl.java）
+List<Map<String,Object>> resultList = jdbcTemplate.queryForList(sql);
+```
+
+下記コマンドでMapリストから個別にデータを取得できる。
+```
+（TaskDaoImpl.java）
+List<Map<String,Object>> resultList = jdbcTemplate.queryForMap(sql,id);
+```
+
+<img width="564" alt="image" src="https://user-images.githubusercontent.com/97214466/151317119-603186bb-ff71-4a75-8265-71e26dc64dbb.png">
+
+## Optionalについて
+
+下記コマンドはOptionalに関するコマンドである。普通はstr=nullであるため、これをsysoutするとエラーが発生するが、Optinaolを用いることで、エラーを回避することができる。  
+```
+  String　str = null;
+  Optional<String> strOpt = Optional.ofNullable(str);
+  if(strOpt.isPresent()) {
+    String message = strOpt.get();
+    System.out.println(message.length());
+  }
+```
+
+## Schemeについて
+下記コマンドはデータに関するものであるが、taskのtype_idはtask_typeテーブルとtaskテーブルをJOINさせるために追加された。
+```
+CREATE TABLE task_type (
+  id int(2) NOT NULL,
+  type varchar(20) NOT NULL,　　　　
+  comment varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE task (
+  id int(5) NOT NULL AUTO_INCREMENT,
+  user_id int(5) NOT NULL,
+  type_id int(2) NOT NULL,   ///////JOIN用に追加
+  title varchar(50) NOT NULL,
+  detail text,
+  deadline datetime NOT NULL,
+  PRIMARY KEY (id)
+) ;
+```
+
+そのため、下図のDaoファイルでは結合されている。
+<img width="403" alt="image" src="https://user-images.githubusercontent.com/97214466/151320434-608a2471-d743-4495-b4f6-be7c7df030fb.png">
+
+下記コマンドはデータベースのものであるが、下のOptionalでラッピングすることによって、データにNullがある可能性があることを示している。
+```
+Map<String, Object> result = jdbcTemplate.queryForMap(sql,id);
+
+Task task = new Task();
+task.setId((int)result.get("id"));
+task.setUserId((int)result.get("user_id"));
+task.setTypeId((int)result.get("type_id"));
+task.setTitle((String)result.get("title"));
+task.setDetail((String)result.get("detail"));
+task.setDeadline(((Timestamp) result.get("deadline")).toLocalDateTime());
+
+//taskをOptionalでラップする
+Optional<Task> taskOpt = Optional.ofNullable(task); //////ここ！
+
+```
+
+## バリデーションについて
+データベースの例外処理において、アノテーション（@Nullなど）が対応していないものはServiceImpl.javaで個別にバリデーション設定を作る必要がある。  
+なんてめんどうなんだ...
+ex)
+```
+try {
+  return dao.findById(id);
+} catch (EmptyResultDataAccessException e) {
+  throw new TaskNotFoundException("指定されたタスクが存在しません");
+}
+```
+
+
+
 
 
