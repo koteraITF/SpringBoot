@@ -63,6 +63,7 @@ model.addAttribute("id",map.get("id"));
 
 ## Form
 Formからの情報をまとめるクラス。一般的にフォームに関わることはフォームクラスにまとめる。  
+フォームクラスではprivate変数の定義やコンストラクタの作成、バリデーションの設定などを行う。
 <img width="400" alt="image" src="https://user-images.githubusercontent.com/97214466/151087253-a14c717f-35c1-4a00-b87d-8991ec44e542.png">  
 
 下記コマンドのreturnはinquiryフォルダーのformファイルをreturnする。  
