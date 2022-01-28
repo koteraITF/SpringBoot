@@ -109,6 +109,21 @@ try {
 }
 ```
 
+## CRUD処理 Controller
+
+```
+/task GET　            //新規登録フォームとタスク一覧を表示
+/task/insert POST      //タスクの新規登録
+/task/{id} GET        //タスクの個々の変種画面の表示
+/task/update POST     //編集画面から一件のタスクを更新
+/task/delete POST     //タスク一件を削除
+```
+
+@Digits（integer = 1, fraction=0） :桁１、少数０の意味、つまり１桁のみということ。  
+
+クラス内で重複したり、煩雑になりそうな処理はPrivateメソッドにして、コントローラーの読みやすさを上げたり、メンテナンスしやすくする必要がある。  
+
+
 
 
 
